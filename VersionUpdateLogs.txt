@@ -1,0 +1,77 @@
+Version 1.0: Foundation & Core UI
+
+Established the base PyQt6 architecture with a frameless, transparent, always-on-top window hidden from the taskbar.
+
+Created the system tray integration featuring a basic dropdown menu and a dynamically generated "🧿" icon.
+
+Version 1.1: Physics Engine Integration
+
+Implemented a 60 FPS animation engine driven by QTimer.
+
+Built a custom 2D physics engine utilizing Hooke's Law for spring tension, gravity pulling, and frictional damping.
+
+Added user interactivity, allowing the charm to be grabbed, dragged, and gently pushed via mouse hover (enterEvent).
+
+Version 1.2: Dynamic Assets & Bug Fixes
+
+Added dynamic rendering to read .png files from a local charms folder to automatically populate the right-click menu.
+
+Integrated QMediaPlayer to play a local audio file.
+
+Corrected initial canvas dimension calculations (screen.width() / height()) and offset logic that were causing the application to render invisibly off-screen.
+
+Cleaned up redundant hitbox mathematics in the mouse press events.
+
+Version 2.0: Real-Time Drop Shadows
+
+Engineered a dynamic shadow generation system independent of standard CSS.
+
+Utilized QImage alpha-channel masking and CompositionMode_SourceIn to render a translucent black silhouette offset by 5px underneath the active charm.
+
+Version 3.0: Standalone Windows Executable
+
+Refactored file pathing using a resource_path() helper to route assets to PyInstaller's hidden _MEIPASS temporary extraction directory.
+
+Updated PyInstaller build commands with --add-data flags for self-contained --onefile deployment.
+
+Version 3.1: Compilation Error Handling
+
+Resolved a critical PermissionError crash caused by os.makedirs attempting to write directories within the read-only Windows executable temp folder.
+
+Added graceful fallback logic to display a disabled "Error: Charms folder missing" action in the menu if assets fail to unpack correctly.
+
+Version 4.0: macOS Cross-Platform Support
+
+Engineered a CI/CD pipeline using GitHub Actions to cross-compile the application on a cloud-based macOS runner.
+
+Removed the incompatible --onefile flag to generate native Apple .app bundles (--windowed).
+
+Addressed Git version control constraints regarding empty folders to ensure visual assets deployed to the cloud runner correctly.
+
+Version 5.0: Windows Registry Integration
+
+Added a "Run at Startup" toggle directly to the system tray menu.
+
+Integrated Python's built-in winreg library to programmatically add or remove the application's executable path from the Windows boot sequence.
+
+Version 5.1: Graceful Unroll Animation
+
+Overhauled the "drop-in" startup physics.
+
+Replaced the abrupt zero-position vertical drop with a smooth extension algorithm that gradually increments the string's target_rest_length for realistic, low-bounce easing.
+
+Version 5.2: Audio Decoupling
+
+Decoupled the audio playback engine from the visual load cycle to prevent the bell sound from triggering during application boot.
+
+Created a dedicated handle_menu_selection routing method to ensure audio only plays during deliberate right-click menu interactions, and added a .stop() command to force clean track resets.
+
+Version 6.0: Menu UI Polish & Iconography
+
+Embedded QIcon image previews directly into the right-click dropdown menu alongside their respective text labels.
+
+Injected a comprehensive Qt Style Sheet (QSS) to override system default themes, enforcing a clean white menu background, black text, and standard blue hover states.
+
+Refined QMenu::icon left-padding to perfectly align the imagery away from the window edge.
+
+Added a dedicated "Exit App" action, separated by a visual divider for improved user experience.
