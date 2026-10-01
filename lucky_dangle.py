@@ -1,5 +1,6 @@
 import sys
 import os
+import winreg
 import math
 from PyQt6.QtWidgets import QApplication, QWidget, QSystemTrayIcon, QMenu
 from PyQt6.QtCore import Qt, QTimer, QRectF, QPointF
@@ -107,6 +108,32 @@ class LuckyDangleApp(QWidget):
             # Give it a slight initial downward velocity so it feels heavy when dropped
             self.vel_y = 0.0
         self.update()
+    def is_startup_enabled(self):
+        key_path = r"Software\Microsoft\Windows\CurrentVersion\Run"
+        app_name = "LuckyDangle"
+        try:
+            key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, key_path, 0, winreg.KEY_READ)
+            winreg.QueryValueEx(key, app_name)
+            winreg.CloseKey(key)
+            return True
+        except FileNotFoundError:
+            return False
+
+    def toggle_startup(self, enable):
+        # Gets the path to your compiled .exe (or the .py script if testing)
+        app_path = sys.executable if getattr(sys, 'frozen', False) else os.path.abspath(__file__)
+        key_path = r"Software\Microsoft\Windows\CurrentVersion\Run"
+        app_name = "LuckyDangle"
+
+        try:
+            key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, key_path, 0, winreg.KEY_ALL_ACCESS)
+            if enable:
+                winreg.SetValueEx(key, app_name, 0, winreg.REG_SZ, f'"{app_path}"')
+            else:
+                winreg.DeleteValue(key, app_name)
+            winreg.CloseKey(key)
+        except Exception as e:
+            print(f"Failed to modify startup registry: {e}")
 
     def move_to_top_center(self):
         screen = QApplication.primaryScreen().geometry()
@@ -352,7 +379,16 @@ class LuckyDangleApp(QWidget):
                     )
                     menu.addAction(action)
 
-        # --- ADD THESE LINES FOR THE EXIT BUTTON ---
+        # --- Run at StartUp Menu ---
+
+        menu.addSeparator()
+
+        startup_action = QAction("Run at Startup", self, checkable=True)
+        startup_action.setChecked(self.is_startup_enabled())
+        startup_action.triggered.connect(self.toggle_startup)
+        menu.addAction(startup_action)
+
+        # --- EXIT BUTTON ---
         menu.addSeparator()
         exit_action = QAction("Exit App", self)
         exit_action.triggered.connect(QApplication.quit)
