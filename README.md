@@ -39,7 +39,7 @@ If you want to view the code, modify the physics, or add your own charms, you ca
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/Shyleshpatil/Dangle.git](https://github.com/Shyleshpatil/Dangle.git)
+   git clone https://github.com/Shyleshpatil/Dangle.git
    cd Dangle
    
 ### Install dependencies:
