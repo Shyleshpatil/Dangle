@@ -3,6 +3,9 @@
 A lightweight, interactive desktop widget built with Python and PyQt6. Lucky Dangle sits on your desktop, rendering a customizable, physics-driven charm that gracefully drops into place. It runs silently in your system tray and stays out of your way.
 
 ![Lucky Dangle Demo](Demo_1.gif)
+![Lucky Dangle Demo2](Dangle2.gif)
+![Lucky Dangle Demo3](menuPreview.png)
+
 
 ## ✨ Features
 * **Custom Physics Engine:** Features realistic spring physics (Hooke's Law) for a natural, gravity-driven drop and bounce animation when loading charms.
