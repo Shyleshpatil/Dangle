@@ -45,12 +45,8 @@ If you want to view the code, modify the physics, or add your own charms, you ca
 ### Install dependencies:
   ```bash
     pip install PyQt6
-    
+
 ### Run the application:
   ```bash
     python lucky_dangle.py
----
-
-## Adding Custom Charms
-Want to add your own images? Simply drop any .png file into the charms/ folder. The application will automatically read the folder on startup and add your new image to the right-click system tray menu.
    
