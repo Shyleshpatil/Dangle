@@ -20,7 +20,7 @@ A lightweight, interactive desktop widget built with Python and PyQt6. Lucky Dan
 
 You do not need to install Python to run this app. 
 
-1. Go to the [dist](../../dist) page on this repository.
+1. Go to the [dist](https://github.com/Shyleshpatil/Dangle/tree/main/dist) page on this repository.
 2. Download `lucky_dangle.exe`.
 3. Run the executable file inside. 
    > **Note:** Because this is an unsigned indie app, Windows SmartScreen may block it initially. Click "More Info" -> "Run Anyway".
