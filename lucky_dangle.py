@@ -44,7 +44,7 @@ class LuckyDangleApp(QWidget):
         # 3. Elastic Spring Physics State
         self.target_rest_length = 150  # NEW: The final length of the string
         self.rest_length = 150       # The natural length of the string
-        self.charm_x = self.width() / 2
+        self.charm_x = self.width() - 300
         self.charm_y = self.rest_length
         self.vel_x = 0.0
         self.vel_y = 0.0
@@ -137,10 +137,7 @@ class LuckyDangleApp(QWidget):
 
     def move_to_top_center(self):
         screen = QApplication.primaryScreen().geometry()
-        offset = 500
-        x = screen.width() - self.width() + offset
-        y = 0
-        self.move(int(x), y)
+        self.move(screen.x(), screen.y())
 
     def setup_tray(self):
         self.tray_icon = QSystemTrayIcon(self)
@@ -187,7 +184,7 @@ class LuckyDangleApp(QWidget):
             if self.rest_length < self.target_rest_length:
                 self.rest_length += (self.target_rest_length - self.rest_length) * 0.05
 
-        pivot_x = self.width() / 2
+        pivot_x = self.width() - 300
         pivot_y = 0
 
         # Calculate distance between the pivot and the charm
@@ -227,7 +224,7 @@ class LuckyDangleApp(QWidget):
         painter.setRenderHint(QPainter.RenderHint.Antialiasing)
         painter.setRenderHint(QPainter.RenderHint.SmoothPixmapTransform)
 
-        pivot_x = self.width() / 2
+        pivot_x = self.width() - 300
         pivot_y = 0
 
         dx = self.charm_x - pivot_x
